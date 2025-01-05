@@ -1,5 +1,3 @@
-import 'package:expenses/components/transaction_form.dart';
-import 'package:expenses/components/transaction_list.dart';
 import 'package:expenses/components/transaction_user.dart';
 import 'package:flutter/material.dart';
 
@@ -20,18 +18,20 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         title: Text('Despesas Pessoais', style: TextStyle(color: Colors.white)),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            child: Card(
-              color: Colors.blueAccent,
-              child: Text('Gráfico'),
-              elevation: 5,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              child: Card(
+                color: Colors.blueAccent,
+                child: Text('Gráfico'),
+                elevation: 5,
+              ),
             ),
-          ),
-          TransactionUser(),
-        ],
+            TransactionUser(),
+          ],
+        ),
       ),
     );
   }
