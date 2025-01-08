@@ -17,7 +17,16 @@ class ExpensesApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.purple,
           foregroundColor: Colors.white,
+          titleTextStyle: ThemeData.light()
+              .textTheme
+              .copyWith(
+                  titleLarge: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300))
+              .titleLarge,
         ),
+        fontFamily: 'Quicksand',
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 55, 1, 65),
             primary: Colors.purple,
@@ -75,7 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Despesas Pessoais', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'Despesas Pessoais',
+          style: TextStyle(color: Colors.white, fontFamily: 'OpenSans'),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
