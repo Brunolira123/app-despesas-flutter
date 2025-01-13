@@ -1,49 +1,57 @@
-import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
+import '../models/transaction.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
 
-  TransactionList(this.transactions);
+  const TransactionList(this.transactions, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 600,
+    return SizedBox(
+      height: 300,
       child: transactions.isEmpty
-          ? Column(children: <Widget>[
-              SizedBox(height: 20),
-              Text(
-                'Nenhuma transação cadastrada!',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              SizedBox(height: 20),
-              Container(
-                height: 200,
-                child: Image.asset(
-                  './assets/images/waiting.png',
-                  fit: BoxFit.cover,
+          ? Column(
+              children: [
+                const SizedBox(height: 20),
+                Text(
+                  'Nenhuma Transação Cadastrada!',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-              )
-            ])
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            )
           : ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (ctx, index) {
                 final tr = transactions[index];
                 return Card(
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     vertical: 8,
                     horizontal: 5,
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
+                      backgroundColor: Colors.purple,
                       radius: 30,
                       child: Padding(
-                        padding: const EdgeInsets.all(6.0),
+                        padding: const EdgeInsets.all(6),
                         child: FittedBox(
-                          child: Text('R ${tr.amount.toStringAsFixed(2)}'),
+                          child: Text(
+                            'R\$${tr.amount.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -30,7 +30,7 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    }).reversed.toList();
+    });
   }
 
   double get _weekTotalValue {
@@ -50,12 +50,13 @@ class Chart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: groupedTransactions.map((tr) {
             return Flexible(
-                fit: FlexFit.tight,
-                child: ChartBar(
-                  label: tr['day'] as String,
-                  value: tr['value'] as double,
-                  percentage: (tr['value'] as double) / _weekTotalValue,
-                ));
+              fit: FlexFit.tight,
+              child: ChartBar(
+                label: tr['day'] as String,
+                value: tr['value'] as double,
+                percentage: (tr['value'] as double) / _weekTotalValue,
+              ),
+            );
           }).toList(),
         ),
       ),
