@@ -4,8 +4,9 @@ import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final void Function(String) onRemove;
 
-  const TransactionList(this.transactions, {Key? key}) : super(key: key);
+  const TransactionList(this.transactions, this.onRemove, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,29 +41,33 @@ class TransactionList extends StatelessWidget {
                     horizontal: 5,
                   ),
                   child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.purple,
-                      radius: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(6),
-                        child: FittedBox(
-                          child: Text(
-                            'R\$${tr.amount.toStringAsFixed(2)}',
-                            style: const TextStyle(
-                              color: Colors.white,
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.purple,
+                        radius: 30,
+                        child: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: FittedBox(
+                            child: Text(
+                              'R\$${tr.amount.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    title: Text(
-                      tr.title,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    subtitle: Text(
-                      DateFormat('d MMM y').format(tr.date),
-                    ),
-                  ),
+                      title: Text(
+                        tr.title,
+                        selectionColor: Colors.purple,
+                      ),
+                      subtitle: Text(
+                        DateFormat('d MMM y').format(tr.date),
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete),
+                        color: Colors.red,
+                        onPressed: () => onRemove(tr.id),
+                      )),
                 );
               },
             ),
