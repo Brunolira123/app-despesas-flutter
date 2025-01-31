@@ -95,43 +95,42 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQueries = MediaQuery.of(context);
+    bool isLandscape = mediaQueries.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       backgroundColor: Colors.purple,
       title: const Text('Despesas Pessoais'),
       actions: [
+        if (isLandscape)
+          IconButton(
+              icon: Icon(
+                _showChart ? Icons.list : Icons.show_chart,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                setState(() {
+                  _showChart = !_showChart;
+                });
+              }),
         IconButton(
-          icon: const Icon(Icons.add),
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
           onPressed: () => _openTransactionFormModal(context),
         ),
       ],
     );
-    final avaliableHeight = MediaQuery.of(context).size.height -
+    final avaliableHeight = mediaQueries.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQueries.padding.top;
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Exibir Gráfico'),
-                  Switch(
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
             if (_showChart || !isLandscape)
               Container(
                 height: avaliableHeight * (isLandscape ? 0.7 : 0.3),
